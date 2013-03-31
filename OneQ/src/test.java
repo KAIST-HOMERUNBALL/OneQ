@@ -5,5 +5,6 @@ public class test {
 		String a;
 		a = "asgadgsg";
 		System.out.println(a);
+		System.out.println(a);
 	}
 }
