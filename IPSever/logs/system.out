@@ -1,0 +1,5 @@
+CompilerOracle: exclude jregex/Pretokenizer.next
+Listening for transport dt_socket at address: 8000
+19:42:22,881 INFO  ~ Starting /Users/mrmirocu/DEVRoot/OneQ/IPSever
+19:42:23,612 WARN  ~ You're running Play! in DEV mode
+19:42:23,704 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
