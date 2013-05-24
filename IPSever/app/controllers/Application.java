@@ -1,10 +1,15 @@
 package controllers;
 
 import play.*;
+import play.db.DB;
 import play.mvc.*;
+
+import groovy.ui.text.FindReplaceUtility;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -34,10 +39,21 @@ public class Application extends Controller {
 	public static int which = 1;
 
 	public static void index() {
+		//System.out.println("start");
+		//Waiting_data wt = Waiting_data.find("byID", 1).first();
+		//System.out.println(wt.number_of_people);
+		Waiting_data wd;
+		try {
+			wd = new Waiting_data(1L, 4, 3, new File("NCRI.png"), new File("ECRI.png"));
+			wd.save();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		render();
 	}
 
-	public static String imageProcess(int which) {
+	public static String imageProcess(int which, Point p1, Point p2) {
 		System.out.println("Image Processing start");
 		Application.which = which;
 		
@@ -64,7 +80,7 @@ public class Application extends Controller {
 			public void onVideoPicture(IVideoPictureEvent ev) {
 				try {
 					System.out.println("Image loading");
-					File f = new File(Application.makeFileName(Application.which));
+					File f = new File(Application.makeFileName(Application.which, ""));
 					Application.bi = ev.getImage();
 					ImageIO.write(Application.bi, "png", f);
 					Application.save_flag = true;
@@ -98,11 +114,16 @@ public class Application extends Controller {
 		mr.close();
 		save_flag = false;
 		
+		ImageProcessor ip = new ImageProcessor(bi, 2, p1, p2);
+		ip.floodfill();
+		ip.markHeads();
+		ip.make2FileByName(makeFileName(which, "INFO"), ip.getOri_im());
+		
 		return "Image Processing Done";
 	}
 	
 
-	public static String makeFileName(int which) {
+	public static String makeFileName(int which, String postfix) {
 		String file;
 		switch (which) {
 		case 1:
@@ -121,6 +142,6 @@ public class Application extends Controller {
 			file = NORTH_CAFE_RECENT_IMAGE;
 			break;
 		}
-		return file + ".png";
+		return file + "_" + postfix + ".png";
 	}
 }

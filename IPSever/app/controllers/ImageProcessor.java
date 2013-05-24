@@ -262,7 +262,14 @@ public class ImageProcessor {
 		}
 	}
 
-	@SuppressWarnings("unused")
+	public void make2FileByName(String name, BufferedImage bi) {
+		try {
+			ImageIO.write(bi, "png", new File(name));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/*@SuppressWarnings("unused")
 	private void show(String title, final BufferedImage img, int x, int y) {
 		JFrame f = new JFrame(title);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -296,5 +303,9 @@ public class ImageProcessor {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}*/
+
+	public BufferedImage getOri_im() {
+		return Ori_im;
 	}
 }
