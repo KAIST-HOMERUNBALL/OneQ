@@ -308,4 +308,8 @@ public class ImageProcessor {
 	public BufferedImage getOri_im() {
 		return Ori_im;
 	}
+	
+	public ArrayList<Head> getHeads() {
+		return heads;
+	}
 }

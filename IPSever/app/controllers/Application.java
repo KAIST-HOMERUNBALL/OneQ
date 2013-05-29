@@ -33,30 +33,32 @@ public class Application extends Controller {
 	public static final String NORTH_MEILU_RECENT_IMAGE = "NMRI";
 	public static final String EAST_CAFE_RECENT_IMAGE = "ECRI";
 	public static final String WEST_CAFE_RECENT_IMAGE = "WCRI";
-	
+
+	public static int image_num = 0;
 	public static boolean save_flag = false;
 	public static BufferedImage bi = null;
 	public static int which = 1;
 
 	public static void index() {
-		//System.out.println("start");
-		//Waiting_data wt = Waiting_data.find("byID", 1).first();
-		//System.out.println(wt.number_of_people);
-		Waiting_data wd;
+		// System.out.println("start");
+		// Waiting_data wt = Waiting_data.find("byID", 1).first();
+		// System.out.println(wt.number_of_people);
+		/*Waiting_data wd;
 		try {
-			wd = new Waiting_data(1L, 4, 3, new File("NCRI.png"), new File("ECRI.png"));
+			wd = new Waiting_data(1L, 4, 3, new File("NCRI.png"), new File(
+					"ECRI.png"));
 			wd.save();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		render();
 	}
 
 	public static String imageProcess(int which, Point p1, Point p2) {
 		System.out.println("Image Processing start");
 		Application.which = which;
-		
+
 		String url;
 		switch (which) {
 		case 1:
@@ -79,12 +81,17 @@ public class Application extends Controller {
 		IMediaListener ml = new MediaListenerAdapter() {
 			public void onVideoPicture(IVideoPictureEvent ev) {
 				try {
-					System.out.println("Image loading");
-					File f = new File(Application.makeFileName(Application.which, ""));
-					Application.bi = ev.getImage();
-					ImageIO.write(Application.bi, "png", f);
-					Application.save_flag = true;
-					System.out.println("Image loading done");
+					if (Application.image_num < 3) {
+						Application.image_num += 1;
+					} else {
+						System.out.println("Image loading");
+						File f = new File(Application.makeFileName(
+								Application.which, ""));
+						Application.bi = ev.getImage();
+						ImageIO.write(Application.bi, "png", f);
+						Application.save_flag = true;
+						System.out.println("Image loading done");
+					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -96,16 +103,16 @@ public class Application extends Controller {
 		mr.setBufferedImageTypeToGenerate(BufferedImage.TYPE_3BYTE_BGR);
 		mr.setQueryMetaData(false);
 		mr.addListener(ml);
-		
-		while(true) {
+
+		while (true) {
 			IError err = null;
 			if (mr != null) {
 				err = mr.readPacket();
 			}
-			
+
 			if (save_flag)
 				break;
-			
+
 			if (err != null) {
 				System.out.println("Error : " + err);
 				break;
@@ -113,15 +120,24 @@ public class Application extends Controller {
 		}
 		mr.close();
 		save_flag = false;
-		
+		image_num = 0;
+
 		ImageProcessor ip = new ImageProcessor(bi, 2, p1, p2);
 		ip.floodfill();
 		ip.markHeads();
 		ip.make2FileByName(makeFileName(which, "INFO"), ip.getOri_im());
-		
+
+		try {
+			Waiting_data wd = new Waiting_data((long) which, ip.getHeads()
+					.size(), ip.getHeads().size() * 1, new File(makeFileName(
+					which, "INFO")), new File(makeFileName(which, "")));
+			wd.save();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return "Image Processing Done";
 	}
-	
 
 	public static String makeFileName(int which, String postfix) {
 		String file;
