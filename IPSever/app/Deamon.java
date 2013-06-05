@@ -14,12 +14,12 @@ public class Deamon extends Job {
 		System.out.println(Application.imageProcess(1, p1, p2));
 		p1 = new Point(50, 50);
 		p2 = new Point(640, 380);
-		//System.out.println(Application.imageProcess(2, p1, p2));
+		System.out.println(Application.imageProcess(2, p1, p2));
 		p1 = new Point(50, 50);
 		p2 = new Point(640, 380);
-		System.out.println(Application.imageProcess(3, p1, p2));
+		//System.out.println(Application.imageProcess(3, p1, p2));
 		p1 = new Point(100, 200);
 		p2 = new Point(700, 480);
-		System.out.println(Application.imageProcess(4, p1, p2));
+		//System.out.println(Application.imageProcess(4, p1, p2));
 	}
 }
