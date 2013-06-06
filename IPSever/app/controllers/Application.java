@@ -195,10 +195,10 @@ public class Application extends Controller {
 						if (newPic.getPixelType() != IPixelFormat.Type.BGR24)
 							throw new RuntimeException("could not decode video as BGR 24 bit data in: " + url);
 						
-						if(pictureNum < 5) {
-							pictureNum++;
-							continue;
-						}
+						//if(pictureNum < 5) {
+						//	pictureNum++;
+						//	continue;
+						//}
 
 						// convert the BGR24 to an Java buffered image
 
@@ -206,11 +206,13 @@ public class Application extends Controller {
 
 						// process the video frame
 
-						bi = javaImage;
-						mFile = processFrame(newPic, javaImage);
-						pictureNum = 0;
-						
-						break;
+						if (newPic.isKeyFrame()) {
+							bi = javaImage;
+							mFile = processFrame(newPic, javaImage);
+							pictureNum = 0;
+							
+							break;
+						}
 					}
 				}
 				//System.out.println("breaked1");
