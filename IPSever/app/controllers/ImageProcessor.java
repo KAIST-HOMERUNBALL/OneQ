@@ -103,6 +103,43 @@ public class ImageProcessor {
 
 		this.Head_im = new BufferedImage(this.width_r, this.height_r,
 				BufferedImage.TYPE_INT_RGB);
+		
+		this.Ori_im.setRGB(p1.getX(), p1.getY(), 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 1, p1.getY(), 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 2, p1.getY(), 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX(), p1.getY() + 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 1, p1.getY() + 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 2, p1.getY() + 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX(), p1.getY() + 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 1, p1.getY() + 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 2, p1.getY() + 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 3, p1.getY(), 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 2, p1.getY(), 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 1, p1.getY(), 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 3, p1.getY() + 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 2, p1.getY() + 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 1, p1.getY() + 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 3, p1.getY() + 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 2, p1.getY() + 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 1, p1.getY() + 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX(), p2.getY() - 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX(), p2.getY() - 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX(), p2.getY() - 3, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 1, p2.getY() - 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 1, p2.getY() - 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 1, p2.getY() - 3, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 2, p2.getY() - 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 2, p2.getY() - 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p1.getX() + 2, p2.getY() - 3, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 1, p2.getY() - 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 2, p2.getY() - 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 3, p2.getY() - 1, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 1, p2.getY() - 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 2, p2.getY() - 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 3, p2.getY() - 2, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 1, p2.getY() - 3, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 2, p2.getY() - 3, 0xFFFFFF);
+		this.Ori_im.setRGB(p2.getX() - 3, p2.getY() - 3, 0xFFFFFF);
 	}
 
 	public int countWindowPerLine(int line_size, int window_size) {

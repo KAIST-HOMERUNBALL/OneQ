@@ -285,7 +285,46 @@ public class Application extends Controller {
 	}
 	
 	public static int makeWaitingTime(int which, int numOfPeople) {
-		return 0;
+		int waiting_time = 0;
+		
+		switch(which) {
+		case 1:
+			if (numOfPeople == 0)
+				waiting_time = 1;
+			else if (numOfPeople < 10)
+				waiting_time = numOfPeople / 2 + 1;
+			else
+				waiting_time = 8;
+			break;
+		case 2:
+			if (numOfPeople == 0)
+				waiting_time = 1;
+			else if (numOfPeople < 10)
+				waiting_time = numOfPeople / 2 + 1;
+			else
+				waiting_time = 5;
+			break;
+		case 3:
+			if (numOfPeople == 0)
+				waiting_time = 1;
+			else if (numOfPeople < 10)
+				waiting_time = numOfPeople;
+			else
+				waiting_time = 12;
+			break;
+		case 4:
+			if (numOfPeople == 0)
+				waiting_time = 1;
+			else if (numOfPeople < 10)
+				waiting_time = numOfPeople / 2 + 1;
+			else
+				waiting_time = 7;
+			break;
+		default:
+			break;
+		}
+		System.out.println(which + " : " + numOfPeople + " : " + waiting_time);
+		return waiting_time;
 	}
 
 	private static File processFrame(IVideoPicture picture, BufferedImage image) {
